@@ -38,6 +38,7 @@ Når man starter en tjeneste f.eks apache som lytter på trafikk på port 80 så
 Normalt så vil installasjonen av apache-pakken, sette opp `apache`-brukeren og lage nødvendige oppstartsskript slik at dette er ikke noe man trenger å gjøre selv.
 
 # Oppgave 1:
-Installer: vim og nginx.
+1. Installer vim og nginx.
+2. Installer java8 (Vil kreve ekstra Repo via PPA)
 
 Sjekk at du får fram eksempelsiden til nginx (http://ip-adresse) skal vi deg eksempelsiden til nginx.
