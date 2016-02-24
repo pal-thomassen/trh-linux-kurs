@@ -48,7 +48,9 @@ Hvis du nå går til `serverip/` får du ut samme som overfor. Men nå har vi di
 
 #### Litt brannmur teori
 
-I Linux er det `iptables` som er brannmuren som Kernelen selv bruker. Den har et grensesnitt med samme navn og kommando `iptables` som kan brukes til og lage regler. Ulempen med dette er at det er veldig lavnivå og for de som ikke er råe på nettverk er den veldig kryptisk. Det finnes derfor en rekke abstraksjoner over `iptables` som alle til slutt genererer `iptables` regler. Ubuntu kommer med `ufw` uncomplicated firewall. For vår del vil den være tilstrekkelig for det vi ønsker og oppnå.
+I Linux er det en innebygde brannmur i kernelen. Den har et grensesnitt med kommandoen `iptables` som kan brukes til og lage regler. Ulempen med dette er at det er veldig lavnivå og for de som ikke er råe på nettverk er den veldig kryptisk. Det finnes derfor en rekke abstraksjoner over `iptables` som alle til slutt genererer `iptables` regler. Ubuntu kommer med `ufw` uncomplicated firewall. For vår del vil den være tilstrekkelig for det vi ønsker og oppnå.
+
+Merk at det er kommet et nyere verktøy som skal erstattet `iptables` kalt `nftables`. For vårt kurs trenger man ikke å forholde seg til noen av delene.
 
 Følgende regler skal vi ha i brannmuren vår:
 
