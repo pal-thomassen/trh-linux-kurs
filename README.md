@@ -1,2 +1,2 @@
-# trh-linux-kurs
+# Linux Kurs
 Linux kurs for Trondheim
