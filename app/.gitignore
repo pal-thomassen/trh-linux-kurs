@@ -1,0 +1,24 @@
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea
+*.classpath
+*.settings
+*.project
+out
+classes
+
+# gradle
+build
+.gradle
+
+# misc
+.DS_Store
+packch
+.rakeTasks
+*.orig
+*.log
+*.pyc
+*.swp
+*~

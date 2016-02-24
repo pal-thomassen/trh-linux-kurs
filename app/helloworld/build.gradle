@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+apply plugin: 'gradle-one-jar'
+apply plugin: 'application'
+
+mainClassName = 'linuxkurs.HelloWorldApplication'
+
+// Configure the oneJar task
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+    archiveName = 'helloworld.jar'
+}
+
+// Configure the run task to start the Dropwizard service
+run {
+    args 'server', './helloworld.yml'
+}
+
+artifacts {
+    oneJar
+}
