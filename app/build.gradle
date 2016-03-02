@@ -17,7 +17,9 @@ subprojects {
 
     dependencies {
         compile (
-                "io.dropwizard:dropwizard-core:$dropwizardVersion"
+                "io.dropwizard:dropwizard-core:$dropwizardVersion",
+                "io.dropwizard:dropwizard-jdbi:$dropwizardVersion",
+                'org.postgresql:postgresql:9.3-1104-jdbc4'
         )
 
     }
