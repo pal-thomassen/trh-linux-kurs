@@ -5,6 +5,7 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import linuxkurs.health.TemplateHealthCheck;
+import linuxkurs.resources.DatabaseResource;
 import linuxkurs.resources.HelloWorldResource;
 import linuxkurs.dao.UserDAO;
 import org.skife.jdbi.v2.DBI;
@@ -30,17 +31,20 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "postgresql");
         final UserDAO dao = jdbi.onDemand(UserDAO.class);
-        dao.createSomethingTable();
 
         final HelloWorldResource resource = new HelloWorldResource(
                 configuration.getTemplate(),
                 configuration.getDefaultName()
         );
 
+        final DatabaseResource databaseResource = new DatabaseResource(dao);
+
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(configuration.getTemplate());
 
+
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
+        environment.jersey().register(databaseResource);
     }
 }
