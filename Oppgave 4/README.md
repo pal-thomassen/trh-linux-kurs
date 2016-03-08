@@ -1,6 +1,6 @@
-# Oppgave 4
+# Oppgave 2
 
-I oppgave 4 skal vi installere postgresql og konfigurere applikasjonen vår til å koble til en database.
+I oppgave 2 skal vi installere postgresql og konfigurere applikasjonen vår til å koble til en database.
 
 Det enkleste er og installere postgresql via pakkesystemet i Ubuntu. Pakken heter `postgresql-9.3`.
 

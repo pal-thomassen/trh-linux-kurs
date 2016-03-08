@@ -1,4 +1,4 @@
-## Oppgave 2
+## Oppgave 3
 
 1. Starte en enkel Java-applikasjon på port 8080
 2. Proxy applikasjonen gjennom nginx

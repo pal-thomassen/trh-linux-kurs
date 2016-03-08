@@ -1,6 +1,6 @@
-# Oppgave 3
+# Oppgave 4
 
-I oppgave 3 skal vi lage upstart-script for ubuntu for Java-applikasjonen vår.
+I oppgave 4 skal vi lage upstart-script for ubuntu for Java-applikasjonen vår.
 
 Upstart er Ubuntu sitt nå updaterte system for å starte, stoppe, overvåke, og restarte tjenester i sysetmet. Nyere Ubuntu-versjoner bruker systemd istedenfor. Det er en del forskjeller mellom disse systemene, men fra et større perspektiv så gjør de det samme. Starter prosseser automatisk ved oppstart. De kan også restarte en tjeneste hvis den skulle feile.
 
