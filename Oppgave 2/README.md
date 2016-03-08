@@ -16,12 +16,12 @@ Når du er inne i postgres-shellet kan du kjøre f.eks `\l`-Kommandoen som liste
 
 Før vi oppretter en egen database bør vi lage en ny bruker som har tilgang til denne. I kurset velger vi å opprette en bruker med navnet `trhdevops`.
 
-For å opprette en bruker brukes `createuser` kommandoen til postgres. La `trhdevops`-brukeren være superbruker av databasen (kan gjøre _alt_).
+For å opprette en bruker brukes `createuser` kommandoen til postgres, denne kjører i vanlig `bash`-shell. La `trhdevops`-brukeren være superbruker av databasen (kan gjøre _alt_).
 
 Når brukeren er opprettet må vi sette ett passord. Logg inn i psql-shellet `psql`.
 Får å sette passord `\password $USERNAME`.
 
-Når bruker er opprettet kan vi lage selve databasen. Da bruker vi `createdb`-kommandoen til postgres. For å gjøre dette enkelt lager vi en database med samme navn som brukeren vår, `trhdevops`.
+Når bruker er opprettet kan vi lage selve databasen. Da bruker vi `createdb`-kommandoen til postgres, denne kjører i vanlig `bash`-shell. For å gjøre dette enkelt lager vi en database med samme navn som brukeren vår, `trhdevops`.
 
 Hvis vi nå prøver å logge inn på databasen med `psql trhdevops trhdevops` -W og skriver inn passordet får vi feilmeldingen `psql: FATAL:  Peer authentication failed for user "trhdevops"`. Dette er fordi default i Ubuntu så vil ikke postgres bruke vanlig passord autentisering, men kun såkalt peer authentication.
 
@@ -31,5 +31,7 @@ Som alle andre applikasjoner så ligger konfigurasjonen til postgres-installasjo
 For å konfigurere tilkoblinger så åpner du opp `/etc/postgresql/9.3/main/pg_hba.conf`. Nederst i denne filen finner man hvilke porter postgres lytter på og hvilken autentisering som er lovlig for de ulike portene.
 
 For å gjøre ting enkelt. Kommenter ut `#local all all peer` linjen og legg til `local trhdevops trhdevops md5` istedenfor. Dette gjør at tilkoblinger fra unix-socket (shellet) bruker md5, altså passord for autentisering. Legg merke til at IPv4 og IPv6-trafikk så lytter postgres default på localhost med md5 for autentisering. Det er dette vi skal bruke i vår Java-applikasjon for å koble til.
+
+For hver endring du gjør i konfigurasjonensfilen må man restarte Postgresql tjenesten `sudo service postgresql restart`
 
 Når dette er på plass kan du teste tilkoblinger med `psql trhdevops trhdevops -w`, skriv inn passordet og du skal være logget inn i postgresql databasen `trhdevops`.
