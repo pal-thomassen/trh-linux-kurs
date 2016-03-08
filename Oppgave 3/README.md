@@ -31,6 +31,22 @@ Kopier disse filene til serveren din. Hint: Bruk scp(secure copy) som bruker ssh
 
 For og (enkelt) kjøre en applikasjon i bakgrunnen på Linux kan du bruke `screen`. Neste oppgave tar for seg mer robust oppsett.
 
+Før oppstart må man konfigurere tilkoblingen til databasen.
+
+Dette er faktisk veldig enkelt når databasen og applikasjonen er på samme server.
+
+Gå inn i `app/helloworld/helloworld.yml` og endre passordet til passordet du opprettet for databasen og database tilkoblingen til `url: jdbc:postgresql://localhost/trhdevops`. Dette lar dropwizard koble til databasen.
+
+Ved oppstart vil Dropwizard automatisk forsøke å koble til databasen og vil eventuelt gi en feilmelding hvis den ikke får koblet til ved oppstart.
+
+Når alt er oppe å kjøre kan du benytte 3 endepunkter for å skrive data til databasen. Alle ligger under `http://serverip/database`.
+
+* create - GET: Oppretter en tabell `something` om den ikke finnes.
+* insert - POST: Tar imot følgende JSON i BODY `{"status" : "something"}`.
+* list - GET: Skriver ut en liste med alt som har blitt skrevet til den ene tabellen.
+
+
+
 ### Nginx konfigurasjon
 
 Nginx lytter nå på port 80 og leverer ut en statisk HTML-side. Vi skal konfigurere nginx til og proxy-trafikk som kommer inn på port 80 og til port 8080 (hvor Java-applikasjonen vår lytter).
