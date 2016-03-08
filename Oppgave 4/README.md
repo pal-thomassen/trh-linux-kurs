@@ -1,35 +1,35 @@
-# Oppgave 2
+# Oppgave 4
 
-I oppgave 2 skal vi installere postgresql og konfigurere applikasjonen vår til å koble til en database.
+I oppgave 4 skal vi lage upstart-script for ubuntu for Java-applikasjonen vår.
 
-Det enkleste er og installere postgresql via pakkesystemet i Ubuntu. Pakken heter `postgresql-9.3`.
+Upstart er Ubuntu sitt nå updaterte system for å starte, stoppe, overvåke, og restarte tjenester i sysetmet. Nyere Ubuntu-versjoner bruker systemd istedenfor. Det er en del forskjeller mellom disse systemene, men fra et større perspektiv så gjør de det samme. Starter prosseser automatisk ved oppstart. De kan også restarte en tjeneste hvis den skulle feile.
 
-## Konfigurere postgres
+For å gjøre denne oppgaven litt enklere har vi inkludert med en eksempelscript:
 
-Når postgres er installert må man opprette en database og sjekke innstillinger for tilkoblinger til denne. Som nevnt tidligere så blir det opprettet en egen bruker som kjører databasen. Brukeren i dette tilfellet har navnet `postgres`. For å opprette en database og kjøre SQL bruker man denne brukeren. For å skifte til `postgres`-brukeren i shellet
+```
+description "Test node.js server"
+author      "Your Name"
 
-`sudo su - postgres`
+start on filesystem or runlevel [2345]
+stop on shutdown
 
-Kommandoen `psql` lar deg koble til det lokale postgres databasesystemet(cluster i postgresterminologi).
+script
 
-Når du er inne i postgres-shellet kan du kjøre f.eks `\l`-Kommandoen som lister ut databaser som er installert. Postgres på Ubuntu kommer med 3-databaser. En med navn `postgres`, `template0` og `template1`.
+    export HOME="/srv"
+    echo $$ > /var/run/nodetest.pid
+    exec /usr/bin/nodejs /srv/nodetest.js
 
-Før vi oppretter en egen database bør vi lage en ny bruker som har tilgang til denne. I kurset velger vi å opprette en bruker med navnet `trhdevops`.
+end script
 
-For å opprette en bruker brukes `createuser` kommandoen til postgres. La `trhdevops`-brukeren være superbruker av databasen (kan gjøre _alt_).
+pre-start script
+    echo "[`date`] Node Test Starting" >> /var/log/nodetest.log
+end script
 
-Når brukeren er opprettet må vi sette ett passord. Logg inn i psql-shellet `psql`.
-Får å sette passord `\password $USERNAME`.
+pre-stop script
+    rm /var/run/nodetest.pid
+    echo "[`date`] Node Test Stopping" >> /var/log/nodetest.log
+end script
+```
 
-Når bruker er opprettet kan vi lage selve databasen. Da bruker vi `createdb`-kommandoen til postgres. For å gjøre dette enkelt lager vi en database med samme navn som brukeren vår, `trhdevops`.
-
-Hvis vi nå prøver å logge inn på databasen med `psql trhdevops trhdevops` -W og skriver inn passordet får vi feilmeldingen `psql: FATAL:  Peer authentication failed for user "trhdevops"`. Dette er fordi default i Ubuntu så vil ikke postgres bruke vanlig passord autentisering, men kun såkalt peer authentication.
-
-## Konfigurere tilkoblinger
-Som alle andre applikasjoner så ligger konfigurasjonen til postgres-installasjonen i `etc`-mappen.
-
-For å konfigurere tilkoblinger så åpner du opp `/etc/postgresql/9.3/main/pg_hba.conf`. Nederst i denne filen finner man hvilke porter postgres lytter på og hvilken autentisering som er lovlig for de ulike portene.
-
-For å gjøre ting enkelt. Kommenter ut `#local all all peer` linjen og legg til `local trhdevops trhdevops md5` istedenfor. Dette gjør at tilkoblinger fra unix-socket (shellet) bruker md5, altså passord for autentisering. Legg merke til at IPv4 og IPv6-trafikk så lytter postgres default på localhost med md5 for autentisering. Det er dette vi skal bruke i vår Java-applikasjon for å koble til.
-
-Når dette er på plass kan du teste tilkoblinger med `psql trhdevops trhdevops -w`, skriv inn passordet og du skal være logget inn i postgresql databasen `trhdevops`.
+Du kan ta utgangspunkt i det skriptet og tilpasse det Java-applikasjonen.
+upstart-script ligger i `/etc/init` på ubuntu
