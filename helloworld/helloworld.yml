@@ -1,4 +1,4 @@
-template: Hello from Work-work, %s!
+template: Hello World, %s!
 defaultName: Trh DevOps
 
 server:
