@@ -1,1 +1,1 @@
-gradle clean build oneJar
+build: gradle clean build oneJar
