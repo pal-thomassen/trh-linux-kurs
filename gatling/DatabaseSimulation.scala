@@ -13,7 +13,7 @@ class DatabaseBeanstalkSimulation extends Simulation {
     .exec(http("request")
       .post("/insert")
       .headers(headers)
-      .body(StringBody("""{"status" : "insert gatling 2"}""")).asJSON)
+      .body(StringBody("""{"status" : "insert gatling"}""")).asJSON)
 
-  setUp(scn.inject(rampUsers(10) over(1 minute)).protocols(httpConf))
+  setUp(scn.inject(rampUsers(10000) over(10 minute)).protocols(httpConf))
 }
