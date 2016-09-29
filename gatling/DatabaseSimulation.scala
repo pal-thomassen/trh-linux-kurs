@@ -2,10 +2,10 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class BasicSimulation extends Simulation {
+class DatabaseBeanstalkSimulation extends Simulation {
 
   val httpConf = http
-    .baseURL("http://localhost:8080/database")
+    .baseURL("http://default-environment.f6w8yrqd9r.us-east-1.elasticbeanstalk.com/database")
 
   val headers = Map("Content-Type" -> "application/x-www-form-urlencoded") // Note the headers specific to a given request
 

@@ -19,6 +19,7 @@ subprojects {
         compile (
                 "io.dropwizard:dropwizard-core:$dropwizardVersion",
                 "io.dropwizard:dropwizard-jdbi:$dropwizardVersion",
+                "de.thomaskrille:dropwizard-template-config:1.4.0",
                 'org.postgresql:postgresql:9.3-1104-jdbc4'
         )
 

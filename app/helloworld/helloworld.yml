@@ -1,18 +1,26 @@
 template: Hello, %s!
 defaultName: Trh DevOps
 
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 5000
+
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
 
   # the username
-  user: trhdevops
+  user: ${RDS_USERNAME}
 
   # the password
-  password: secretpassword
+  password: ${RDS_PASSWORD}
 
   # the JDBC URL
-  url: jdbc:postgresql://54.229.210.40/trhdevops
+  url: jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}
 
   # any properties specific to your JDBC driver:
   properties:

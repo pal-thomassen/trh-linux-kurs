@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -46,6 +48,10 @@ public class HelloWorldConfiguration extends Configuration {
 
     @JsonProperty("database")
     public DataSourceFactory getDataSourceFactory() {
+        Logger logger = LoggerFactory.getLogger(HelloWorldConfiguration.class);
+
+        logger.error("Url to connect to database" + database.getUrl());
+        logger.error("User to connect to database" + database.getUser());
         return database;
     }
 }
